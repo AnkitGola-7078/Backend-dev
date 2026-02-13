@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Students List</title>
+</head>
+<body>
+  <h1>Students List (Branch: <%= branch %>)</h1>
+
+  <% if (allstudents.length === 0) { %>
+    <p>No students registered</p>
+  <% } 
+  else { %>
+    <table border="1" cellpadding="10">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Branch</th>
+        <th>Action</th>
+      </tr>
+      <% allstudents.forEach(student => { %>
+        <tr>
+          <td><%= student.id %></td>
+          <td><%= student.name %></td>
+          <td><%= student.branch %></td>
+          <td>
+            <a href="/students/delete/<%= student.id %>">Delete</a>
+          </td>
+        </tr>
+      <% }) %>
+    </table>
+    <p>Total Students: <%= total %></p>
+  <% } %>
+
+  <br>
+  <a href="/">Add New Student</a>
+</body>
+</html>
