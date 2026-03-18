@@ -1,0 +1,227 @@
+use students
+switched to db students
+db.users.find()
+{
+  _id: ObjectId('69b92df062305c7602807985'),
+  name: 'ankit',
+  age: 23,
+  gender: 'male',
+  number: 2455
+}
+{
+  _id: ObjectId('69b92ee44d08272965fdcc2d'),
+  name: 'rohit',
+  age: 15
+}
+{
+  _id: ObjectId('69b92fe731f9c6c5ad0491cc'),
+  name: 'ankit',
+  age: 21,
+  number: 2455
+}
+{
+  _id: ObjectId('69b9316031f9c6c5ad0491cd'),
+  name: 'satvik',
+  age: 16,
+  gender: 'male'
+}
+{
+  _id: ObjectId('69b9316031f9c6c5ad0491ce'),
+  name: 'bhavya',
+  age: 24,
+  number: 2455
+}
+db.users.deleteOne({name:"ankit"})
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+db.users.find()
+{
+  _id: ObjectId('69b92ee44d08272965fdcc2d'),
+  name: 'rohit',
+  age: 15
+}
+{
+  _id: ObjectId('69b92fe731f9c6c5ad0491cc'),
+  name: 'ankit',
+  age: 21,
+  number: 2455
+}
+{
+  _id: ObjectId('69b9316031f9c6c5ad0491cd'),
+  name: 'satvik',
+  age: 16,
+  gender: 'male'
+}
+{
+  _id: ObjectId('69b9316031f9c6c5ad0491ce'),
+  name: 'bhavya',
+  age: 24,
+  number: 2455
+}
+db.users.updateOne({name:"aryan"},{$set: {collage:"GLA"}},{upsert:true})
+{
+  acknowledged: true,
+  insertedId: ObjectId('69ba6bd5ecd53b7c82d027a8'),
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 1
+}
+db.users.find()
+{
+  _id: ObjectId('69b92ee44d08272965fdcc2d'),
+  name: 'rohit',
+  age: 15
+}
+{
+  _id: ObjectId('69b92fe731f9c6c5ad0491cc'),
+  name: 'ankit',
+  age: 21,
+  number: 2455
+}
+{
+  _id: ObjectId('69b9316031f9c6c5ad0491cd'),
+  name: 'satvik',
+  age: 16,
+  gender: 'male'
+}
+{
+  _id: ObjectId('69b9316031f9c6c5ad0491ce'),
+  name: 'bhavya',
+  age: 24,
+  number: 2455
+}
+{
+  _id: ObjectId('69ba6bd5ecd53b7c82d027a8'),
+  name: 'aryan',
+  collage: 'GLA'
+}
+db.student.insertMany({name:"ankit",age:21,course:"B.Tech",city:"Firozabad",feesPaid:true},{name:"ankit",age:22,course:"B.Tech",city:"Agra",feesPaid:false},{name:"bhavya",age:20,course:"B.Tech",city:"Mathura",feesPaid:true},{name:"satvik",age:23,course:"B.Tech",city:"Firozabad",feesPaid:true},{name:"amit",age:20,course:"B.Tech",city:"Goa",feesPaid:true})
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+db.student.insertMany([{name:"ankit",age:21,course:"B.Tech",city:"Firozabad",feesPaid:true},{name:"ankit",age:22,course:"B.Tech",city:"Agra",feesPaid:false},{name:"bhavya",age:20,course:"B.Tech",city:"Mathura",feesPaid:true},{name:"satvik",age:23,course:"B.Tech",city:"Firozabad",feesPaid:true},{name:"amit",age:20,course:"B.Tech",city:"Goa",feesPaid:true}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69ba74977aa1da620b6ad428'),
+    '1': ObjectId('69ba74977aa1da620b6ad429'),
+    '2': ObjectId('69ba74977aa1da620b6ad42a'),
+    '3': ObjectId('69ba74977aa1da620b6ad42b'),
+    '4': ObjectId('69ba74977aa1da620b6ad42c')
+  }
+}
+db.student.updateMany({name:{$in: {"satvik","amit"}}},{$set:{course:"BCA"}})
+SyntaxError: Unexpected token (1:43)
+
+> 1 | db.student.updateMany({name:{$in: {"satvik","amit"}}},{$set:{course:"BCA"}})
+    |                                            ^
+db.student.updateMany({name:{$in: ["satvik","amit"]}},{$set:{course:"BCA"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+db.student.find({course:"BCA"})
+{
+  _id: ObjectId('69ba74977aa1da620b6ad42b'),
+  name: 'satvik',
+  age: 23,
+  course: 'BCA',
+  city: 'Firozabad',
+  feesPaid: true
+}
+{
+  _id: ObjectId('69ba74977aa1da620b6ad42c'),
+  name: 'amit',
+  age: 20,
+  course: 'BCA',
+  city: 'Goa',
+  feesPaid: true
+}
+db.student.find({age gt 21})
+SyntaxError: Unexpected token, expected "," (1:21)
+
+> 1 | db.student.find({age gt 21})
+    |                      ^
+db.student.find({age $gt 21})
+SyntaxError: Unexpected token, expected "," (1:21)
+
+> 1 | db.student.find({age $gt 21})
+    |                      ^
+db.student.find({age: {$gt: 21}})
+{
+  _id: ObjectId('69ba74977aa1da620b6ad429'),
+  name: 'ankit',
+  age: 22,
+  course: 'B.Tech',
+  city: 'Agra',
+  feesPaid: false
+}
+{
+  _id: ObjectId('69ba74977aa1da620b6ad42b'),
+  name: 'satvik',
+  age: 23,
+  course: 'BCA',
+  city: 'Firozabad',
+  feesPaid: true
+}
+db.emree.find(
+  {},
+  { name: 1, course: 1, _id: 0 }
+)
+db.student.updateOne({name:"ankit"},)
+MongoInvalidArgumentError: Update document requires atomic operators
+db.student.updateOne({name:"ankit"},{$set: {city:"Mathura"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.student.updateOne({course:"BCA"},{$set: {course:"MCA"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.student.updateMany({age: {$gt: 21}},{$set:{feesPaid:true}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.student.deleteMany({feesPaid: {$eq: false}})
+{
+  acknowledged: true,
+  deletedCount: 0
+}
+db.student.deleteMany({age: {$gt: 21}})
+{
+  acknowledged: true,
+  deletedCount: 2
+}
+db.student.find({name:1,course:1})
+db.student.find({},{name:1,course:1})
+{
+  _id: ObjectId('69ba74977aa1da620b6ad428'),
+  name: 'ankit',
+  course: 'B.Tech'
+}
+{
+  _id: ObjectId('69ba74977aa1da620b6ad42a'),
+  name: 'bhavya',
+  course: 'B.Tech'
+}
+{
+  _id: ObjectId('69ba74977aa1da620b6ad42c'),
+  name: 'amit',
+  course: 'BCA'
+}
+students
